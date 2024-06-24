@@ -7,8 +7,6 @@ use std::sync::Arc;
 
 pub trait Ctx: Send + Sync {
     type Config;
-
-
 }
 
 pub trait AxumCtx: Ctx + Sized {

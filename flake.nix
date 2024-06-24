@@ -1,5 +1,5 @@
 {
-  description = "A flake for building a Rust workspace using buildRustPackage.";
+  description = "This flake is designed to be used ...";
 
   inputs = {
     flake-utils.url  = "github:numtide/flake-utils";

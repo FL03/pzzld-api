@@ -2,28 +2,32 @@
     Appellation: application <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+use super::Server;
 use crate::config::{Context, Settings};
 use std::sync::Arc;
 use tokio::net::TcpListener;
 
 pub struct App {
     ctx: Arc<Context>,
+    server: Server,
 }
 
 impl App {
     pub fn new() -> Self {
-        let ctx = Context::default();
-        Self { ctx: Arc::new(ctx) }
+        Self::from_config(Settings::build().unwrap_or_default())
     }
 
     pub fn from_config(config: Settings) -> Self {
-        let ctx = Context::from_config(config);
-
-        Self { ctx: Arc::new(ctx) }
+        let ctx = {
+            let tmp = Context::from_config(config);
+            Arc::new(tmp)
+        };
+        let server = Server::new(ctx.clone());
+        Self { ctx, server }
     }
 
     pub async fn bind_server(&self) -> std::io::Result<TcpListener> {
-        TcpListener::bind(self.ctx.settings().server_addr().addr()).await
+        self.server.server_addr().bind().await
     }
 
     pub fn ctx(&self) -> &Context {
@@ -42,8 +46,7 @@ impl App {
     }
 
     pub async fn serve(self) -> std::io::Result<()> {
-        use super::AppServer;
-        let server = AppServer::new(self.ctx);
+        let server = super::Server::new(self.ctx);
         server.serve().await
     }
 }
