@@ -1,16 +1,14 @@
-# pzzld
+# pzzld-api
 
-[![Clippy](https://github.com/FL03/pzzld/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/pzzld/actions/workflows/clippy.yml)
-[![Rust](https://github.com/FL03/pzzld/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/pzzld/actions/workflows/rust.yml)
-
-[![crates.io](https://img.shields.io/crates/v/pzzld.svg)](https://crates.io/crates/pzzld)
-[![docs.rs](https://docs.rs/pzzld/badge.svg)](https://docs.rs/pzzld)
+[![Clippy](https://github.com/FL03/pzzld/actions-api/workflows/clippy.yml/badge.svg)](https://github.com/FL03/pzzld-api/actions/workflows/clippy.yml)
+[![Docker](https://github.com/FL03/pzzld-api/actions/workflows/docker.yml/badge.svg)](https://github.com/FL03/pzzld-api/actions/workflows/docker.yml)
+[![Rust](https://github.com/FL03/pzzld-api/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/pzzld-api/actions/workflows/rust.yml)
 
 ***
 
-### ***_This project is a work_***
+### ***_This project is a work in progress_***
 
-Welcome to pzzld
+Welcome to the pzzld-api, a high-powered RESTful API built with Rust using the Axum web-framework along with Diesel, Tokio
 
 ## Getting Started
 
@@ -19,7 +17,10 @@ Welcome to pzzld
 #### _Clone the repository_
 
 ```bash
-git clone https://github.com/FL03/pzzld.git
+git clone https://github.com/FL03/pzzld-api.git
+cd pzzld-api
+
+cargo build -r -v 
 ```
 
 ### Usage
