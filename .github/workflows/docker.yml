@@ -32,7 +32,7 @@ jobs:
         dockerfile: Dockerfile
         name: ${{ secrets.DOCKERHUB_USERNAME }}/pzzld-api
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64
         snapshot: true
         tags: "latest"
         username: ${{ secrets.DOCKERHUB_USERNAME }}
