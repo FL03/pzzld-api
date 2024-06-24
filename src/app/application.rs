@@ -46,7 +46,7 @@ impl App {
     }
 
     pub async fn serve(self) -> std::io::Result<()> {
-        let server = super::Server::new(self.ctx);
-        server.serve().await
+        // let server = super::Server::new(self.ctx);
+        self.server.serve().await
     }
 }
