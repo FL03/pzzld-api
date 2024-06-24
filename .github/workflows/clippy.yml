@@ -7,8 +7,6 @@ concurrency:
 on:
   pull_request:
     branches: [ main ]
-  push:
-    branches: [ main ]
   release:
     types: [ created ]
   repository_dispatch:
@@ -31,10 +29,10 @@ jobs:
       - name: setup (rust)
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
-          toolchain: stable
           components: clippy
           override: true
+          profile: minimal
+          toolchain: stable
       - name: setup (clippy)
         run: cargo install clippy-sarif sarif-fmt
       - name: analyze

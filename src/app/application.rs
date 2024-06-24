@@ -22,11 +22,16 @@ impl App {
         Self { ctx: Arc::new(ctx) }
     }
 
+    pub async fn bind_server(&self) -> std::io::Result<TcpListener> {
+        TcpListener::bind(self.ctx.settings().server_addr().addr()).await
+    }
+
     pub fn ctx(&self) -> &Context {
         &self.ctx
     }
     // TODO: Implement init() for App
     pub fn init(self) -> Self {
+        tracing::info!("Initialization successful");
         self
     }
 
@@ -41,21 +46,4 @@ impl App {
         let server = AppServer::new(self.ctx);
         server.serve().await
     }
-}
-
-impl App {
-    pub async fn bind_server(&self) -> std::io::Result<TcpListener> {
-        TcpListener::bind(self.ctx.settings().server_addr().addr()).await
-    }
-}
-/*
- ************* Private *************
-*/
-impl App {
-    // fn router(&self) -> axum::Router {
-    //     use super::AppServer;
-
-    //     let server = AppServer::new(self.ctx.clone());
-    //     server.build().
-    // }
 }

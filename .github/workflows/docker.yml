@@ -9,7 +9,6 @@ on:
     branches: [ main ]
   push:
     branches: [ main ]
-    tags: [ v*.*.* ]
   release:
     types: [ created ]
   repository_dispatch:
@@ -17,6 +16,7 @@ on:
   workflow_dispatch:
 
 env:
+  DOCKERHUB_USERNAME: jo3mccain
   REGISTRY: hub.docker.com
 
 jobs:
@@ -30,9 +30,9 @@ jobs:
       with:
         context: .
         dockerfile: Dockerfile
-        name: ${{ secrets.DOCKERHUB_USERNAME }}/pzzld-api
+        name: ${{ env.DOCKERHUB_USERNAME }}/pzzld-api
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         platforms: linux/amd64
         snapshot: true
         tags: "latest"
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        username: ${{ env.DOCKERHUB_USERNAME }}

@@ -36,7 +36,7 @@ impl Settings {
             .set_default("mode", Mode::development())?
             .set_default("server.addr.host", "0.0.0.0")?
             .set_default("server.addr.port", 8080)?
-            .set_override_option("mode", std::env::var("SERVER_MODE").ok())?
+            .set_override_option("mode", std::env::var("APPMODE").ok())?
             .set_override_option("server.addr.host", std::env::var("SERVER_HOST").ok())?
             .set_override_option("server.addr.port", std::env::var("SERVER_PORT").ok())?
             .add_source(collect_configurations("**/.config/*.config.*", false))
