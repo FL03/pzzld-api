@@ -45,4 +45,4 @@ jobs:
             cargo-${{ matrix.toolchain }}-
             cargo-
       - name: build
-        run: cargo build --features full -r -v --workspace
+        run: cargo build --all-features -r -v

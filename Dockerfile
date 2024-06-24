@@ -21,11 +21,14 @@ ENV BINARY=pzzld \
 
 RUN apt-get update -y && apt-get upgrade -y
 
-COPY --from=builder /workspace/target/release/${BINARY} /app/${BINARY}
-COPY --from=builder /workspace/assets /app/assets
-COPY --from=builder /workspace/Puzzled.toml /app/Puzzled.toml
+WORKDIR /app
+
+COPY --from=builder /workspace/target/release/${BINARY} /${BINARY}
+COPY --from=builder /workspace/assets /assets
+COPY --from=builder /workspace/Puzzled.toml /Puzzled.toml
 
 EXPOSE 80
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "app/${BINARY}" ]
+
+ENTRYPOINT [ ${BINARY} ]
