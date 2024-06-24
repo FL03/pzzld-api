@@ -1,0 +1,46 @@
+name: binaries
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CARGO_TERM_COLOR: always
+  CRATE_BASENAME: ${{ github.event.repository.name }}
+
+on:
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  build:
+    name: Build (cli)
+    strategy:
+      matrix:
+        platform: [ ubuntu-latest ]
+        toolchain: [ stable, nightly ]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup (rustup)
+        run: |
+          rustup default ${{ matrix.toolchain }}
+          rustup update
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-cli-${{ hashFiles('**/Cargo.lock') }}
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/debug
+            target/release
+          restore-keys: |
+            bin-${{ runner.os }}-cargo-
+            bin-cargo-
+      - name: build (cli)
+        run: |
+          cargo build --all-features -p wazm-cli -r -v
+          cp target/release/puzzled
+      - run: waz --version

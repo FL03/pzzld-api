@@ -1,0 +1,12 @@
+version: '2'
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: .docker/api/Dockerfile
+    environment:
+      SERVER_PORT: 8080
+    stop_signal: SIGINT
+    ports:
+      - '8080:8080'
+

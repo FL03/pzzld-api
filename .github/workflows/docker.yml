@@ -1,0 +1,38 @@
+name: Docker
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+    tags: [ v*.*.* ]
+  release:
+    types: [ created ]
+  repository_dispatch:
+    types: [ docker ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: hub.docker.com
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/setup-buildx-action@v3
+    - name: Publish
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      with:
+        context: .
+        dockerfile: Dockerfile
+        name: ${{ secrets.DOCKERHUB_USERNAME }}/pzzld-api
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        platforms: linux/amd64,linux/arm64
+        snapshot: true
+        tags: "latest"
+        username: ${{ secrets.DOCKERHUB_USERNAME }}

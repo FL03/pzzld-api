@@ -1,0 +1,48 @@
+name: Rust
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CARGO_TERM_COLOR: always
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  release:
+    types: [ created ]
+  repository_dispatch:
+    types: [ rust ]
+  workflow_dispatch:
+
+jobs:
+  builder:
+    name: Build
+    strategy:
+      matrix:
+        platform: [ macos-latest, ubuntu-latest, windows-latest ]
+        toolchain: [ stable, nightly ]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: rustup
+        run: rustup default ${{ matrix.toolchain }} && rustup update
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          key: cargo-${{ matrix.toolchain }}-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/debug
+            target/release
+          restore-keys: |
+            cargo-${{ matrix.toolchain }}-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+            cargo-${{ matrix.toolchain }}-${{ runner.os }}-
+            cargo-${{ matrix.toolchain }}-
+            cargo-
+      - name: build
+        run: cargo build --features full -r -v --workspace
