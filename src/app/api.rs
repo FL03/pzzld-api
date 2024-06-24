@@ -52,7 +52,7 @@ impl AppServer {
         self.router.clone()
     }
 
-    pub async fn serve(self) -> pzzld::IoResult<()> {
+    pub async fn serve(self) -> std::io::Result<()> {
         let listener = self.server_addr().bind().await?;
         // let router = _builder(self.router).layer(Extension(self.ctx));
 

@@ -1,1 +1,57 @@
-/target
+# Artifacts
+**/.artifacts/cache/
+**/.artifacts/data/
+**/.artifacts/tmp/
+
+# Development
+
+## Config
+**/.config/*.config.*
+
+*.env
+*.env.*
+
+!**/.config/default.config.*
+!**/env.example
+!**/*.env.example
+
+## Logs
+*.log
+*.log.*
+
+# Language Specific
+
+### NodeJS
+**/build/
+**/node_modules/
+
+
+**/package-lock.json
+
+### Rust-Lang
+**/debug/
+**/target/
+
+**/Cargo.lock
+
+*.bk
+*.bk.*
+
+# Misc
+
+## File Extensions
+*.db
+*.db.*
+
+*.csv
+*.csv.*
+
+*.lock
+*.lock.*
+
+*-lock.json
+
+!flake.lock
+
+*.zip
+*.zip.*

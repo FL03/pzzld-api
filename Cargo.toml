@@ -1,19 +1,27 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com> (https://github.com/FL03)"]
 categories = []
-description = "Pzzld is a sandbox Rust project for learning and experimenting with Rust."
+default-run = "pzzld"
+description = "The pzzld-api provides a RESTful API for the pzzld project."
 edition = "2021"
-homepage = "https://github.com/FL03/pzzld/wikis"
+homepage = "https://github.com/FL03/pzzld-api/wikis"
 keywords = []
 license = "Apache-2.0"
 name = "pzzld-api"
-repository = "https://github.com/FL03/pzzld.git"
+repository = "https://github.com/FL03/pzzld-api.git"
 readme = "README.md"
 version = "0.1.0"
 
+[[bin]]
+bench = false
+doctest = false
+name = "pzzld"
+path = "src/main.rs"
+
+[build-dependencies]
+
 [dependencies]
 anyhow = "1"
-async-trait = "0.1"
 config = "0.14"
 futures = "0.3"
 futures-util = "0.3"
@@ -66,4 +74,5 @@ version = "0.1"
 features = ["env-filter"]
 version = "0.3"
 
+[dev-dependencies]
 
