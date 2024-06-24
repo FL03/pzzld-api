@@ -32,7 +32,7 @@
 **/debug/
 **/target/
 
-**/Cargo.lock
+Cargo.lock
 
 *.bk
 *.bk.*
