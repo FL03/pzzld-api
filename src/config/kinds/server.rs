@@ -92,7 +92,7 @@ impl ServerAddr {
 
     pub fn builder() -> Result<Self, ConfigError> {
         Config::builder()
-            .set_default("host", "0.0.0.0")?
+            .set_default("host", "127.0.0.1")?
             .set_default("port", 8080)?
             .add_source(Environment::default().separator("_").prefix("SERVER"))
             .add_source(collect_configurations("**/*.config.*", false))

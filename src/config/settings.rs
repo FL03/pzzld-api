@@ -34,7 +34,7 @@ impl Settings {
     fn builder() -> Result<ConfigBuilder<DefaultState>, config::ConfigError> {
         let builder = Config::builder()
             .set_default("mode", Mode::development())?
-            .set_default("server.addr.host", "0.0.0.0")?
+            .set_default("server.addr.host", "127.0.0.1")?
             .set_default("server.addr.port", 8080)?
             .set_override_option("mode", std::env::var("APPMODE").ok())?
             .set_override_option("server.addr.host", std::env::var("SERVER_HOST").ok())?
