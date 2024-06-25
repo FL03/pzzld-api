@@ -30,7 +30,7 @@ jobs:
       with:
         context: .
         dockerfile: Dockerfile
-        name: ${{ env.DOCKERHUB_USERNAME }}/pzzld-api
+        name: ${{ env.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         platforms: linux/amd64
         snapshot: true
