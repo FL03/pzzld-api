@@ -16,20 +16,16 @@ RUN cargo build -r -v
 
 FROM debian:latest as runner-base
 
-ENV BINARY=pzzld \
-    PORT=8080 
+ENV PORT=8080 
 
 RUN apt-get update -y && apt-get upgrade -y
 
-WORKDIR /app
-
-COPY --from=builder /workspace/target/release/pzzld /pzzld
-COPY --from=builder /workspace/assets /assets
-COPY --from=builder /workspace/Puzzled.toml /Puzzled.toml
+COPY --from=builder /workspace/target/release/pzzld /app/pzzld
+COPY --from=builder /workspace/assets /app/assets
+COPY --from=builder /workspace/Puzzled.toml /app/Puzzled.toml
 
 EXPOSE 80
 EXPOSE 8080
 EXPOSE ${PORT}
-
 
 ENTRYPOINT [ "app/pzzld" ]
