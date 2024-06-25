@@ -27,13 +27,12 @@ futures = "0.3"
 futures-util = "0.3"
 glob = "0.3"
 http = "1"
-lazy_static = "1"
-paste = "1"
-pin-project-lite = "0.2"
 serde = { features = ["derive"], version = "1" }
 serde_json = "1"
 strum = { features = ["derive"], version = "0.26" }
 smart-default = "0.7"
+tower = "0.4"
+tower-service = "0.3"
 
 [dependencies.axum]
 features = ["macros"]
@@ -43,17 +42,9 @@ version = "0.7"
 features = ["full"]
 version = "1"
 
-[dependencies.hyper-util]
-features = ["full"]
-version = "0.1"
-
 [dependencies.tokio]
 features = ["full"]
 version = "1"
-
-[dependencies.tower]
-features = []
-version = "0.4"
 
 [dependencies.tower-http]
 features = [
@@ -61,10 +52,6 @@ features = [
     "trace"
 ]
 version = "0.5"
-
-[dependencies.tower-service]
-features = []
-version = "0.3"
 
 [dependencies.tracing]
 features = ["log"]
