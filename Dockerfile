@@ -23,12 +23,13 @@ RUN apt-get update -y && apt-get upgrade -y
 
 WORKDIR /app
 
-COPY --from=builder /workspace/target/release/${BINARY} /${BINARY}
+COPY --from=builder /workspace/target/release/pzzld /pzzld
 COPY --from=builder /workspace/assets /assets
 COPY --from=builder /workspace/Puzzled.toml /Puzzled.toml
 
 EXPOSE 80
+EXPOSE 8080
 EXPOSE ${PORT}
 
 
-ENTRYPOINT [ "app/${BINARY}" ]
+ENTRYPOINT [ "pzzld" ]
