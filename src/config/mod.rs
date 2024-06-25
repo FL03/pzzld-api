@@ -14,10 +14,12 @@ pub mod kinds {
     #[doc(inline)]
     pub use self::prelude::*;
 
-    pub mod mode;
-    pub mod server;
+    pub(crate) mod logger;
+    pub(crate) mod mode;
+    pub(crate) mod server;
 
     pub(crate) mod prelude {
+        pub use super::logger::*;
         pub use super::mode::*;
         pub use super::server::*;
     }

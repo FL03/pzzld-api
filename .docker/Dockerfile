@@ -28,6 +28,7 @@ COPY --from=builder /pzzld /usr/local/bin
 RUN chown appuser /usr/local/bin/pzzld
 
 COPY --from=builder /app/.config /opt/pzzld/.config
+COPY --from=builder /app/assets /opt/pzzld/assets
 
 RUN chown -R appuser /opt/pzzld
 

@@ -2,7 +2,7 @@
     Appellation: settings <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-use super::{collect_configurations, Mode, ServerAddr, ServerConfig};
+use super::{collect_configurations, LoggerConfig, LogLevel, Mode, ServerAddr, ServerConfig};
 use config::builder::{ConfigBuilder, DefaultState};
 use config::{Config, Environment};
 
@@ -19,6 +19,7 @@ use config::{Config, Environment};
     serde::Serialize,
 )]
 pub struct Settings {
+    pub logger: LoggerConfig, 
     pub mode: Mode,
     pub server: ServerConfig,
 }
@@ -26,6 +27,7 @@ pub struct Settings {
 impl Settings {
     pub fn debug() -> Self {
         Self {
+            logger: LoggerConfig::default(),
             mode: Mode::Development,
             server: ServerConfig::default(),
         }
@@ -33,6 +35,7 @@ impl Settings {
 
     fn builder() -> Result<ConfigBuilder<DefaultState>, config::ConfigError> {
         let builder = Config::builder()
+            .set_default("logger.level", LogLevel::info())?
             .set_default("mode", Mode::development())?
             .set_default("server.addr.host", "127.0.0.1")?
             .set_default("server.addr.port", 8080)?
@@ -41,7 +44,7 @@ impl Settings {
             .set_override_option("server.addr.port", std::env::var("SERVER_PORT").ok())?
             .add_source(collect_configurations("**/.config/*.config.*", false))
             .add_source(Environment::default().separator("_").prefix("PZZLD"))
-            .add_source(config::File::with_name("Puzzled.toml"));
+            .add_source(config::File::with_name(".config/default.config.toml"));
         Ok(builder)
     }
 
