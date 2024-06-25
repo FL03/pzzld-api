@@ -40,11 +40,11 @@ pub(crate) mod utils {
     /// A generic function wrapper extending glob::glob
     fn gather<F, T>(pattern: &str, f: F) -> Vec<T>
     where
-        F: Fn(PathBuf) -> T,
+        F: Copy + Fn(PathBuf) -> T,
     {
         glob::glob(pattern)
             .expect("Failed to collect files")
-            .filter_map(|r| r.ok().map(|p| f(p)))
+            .filter_map(|r| r.ok().map(f))
             .collect()
     }
 
