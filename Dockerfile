@@ -32,4 +32,4 @@ EXPOSE 8080
 EXPOSE ${PORT}
 
 
-ENTRYPOINT [ "pzzld" ]
+ENTRYPOINT [ "app/pzzld" ]
