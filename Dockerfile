@@ -14,7 +14,7 @@ COPY . .
 
 RUN cargo build -r -v
 
-FROM debian:latest as runner-base
+FROM debian:latest AS runner-base
 
 ENV PORT=8080 
 

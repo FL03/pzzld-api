@@ -1,0 +1,14 @@
+environment = "production"
+name = ""
+
+[server]
+
+[server.addr]
+host = "127.0.0.1"
+port = 8080
+
+[application]
+
+[assets]
+context = "/assets"
+workdir = "assets"
